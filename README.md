@@ -2,14 +2,14 @@
 
 ### Autor: Sebastian Rilo
 
-## Tecnologías
+## TecnologÃ­as
 `Spring Framework` `Java 11` `HSQLDB`
 
-## Descripción
-Este es un Proyecto de pequeña escala desarrollado para modelar un sistema de gestion de productos de poca complejidad, que seran almacenados en memoria utilizando la base de datos relacional HSQLDB.
+## DescripciÃ³n
+Este es un Proyecto de pequeÃ±a escala desarrollado para modelar un sistema de gestion de productos de poca complejidad, que seran almacenados en memoria utilizando la base de datos relacional HSQLDB.
 
 ## Avisos importantes
-Este proyecto cuenta con datos precargados para facilitar la prueba de funcionalidades de la aplicación. En caso de querer inicializar la App con una base de datos vacia, se debe comentar/eliminar el [metodo inicializador ubicado en la clase principal de la aplicacion](https://github.com/sebastian-rilo/Postulacion-PayGoal/blob/272ce5e0aaf063c7455e485f70e53d750ee3dc0d/src/main/java/com/PayGoal/Postulacion/PostulacionApplication.java#L30). 
+Este proyecto cuenta con datos precargados para facilitar la prueba de funcionalidades de la aplicaciÃ³n. En caso de querer inicializar la App con una base de datos vacia, se debe comentar/eliminar el [metodo inicializador ubicado en la clase principal de la aplicacion](https://github.com/sebastian-rilo/Postulacion-PayGoal/blob/272ce5e0aaf063c7455e485f70e53d750ee3dc0d/src/main/java/com/PayGoal/Postulacion/PostulacionApplication.java#L30). 
 
 ## Endpoints
 Este proyecto cuenta con un total de 6 endpoints que van a permitir al usuario crear, actualizar, eliminar y hacer consultas sobre los produtos de la base de datos.
@@ -29,33 +29,34 @@ Endpoint que nos permite obtener de manera directa una lista de productos, esta 
 La direccion del ordenamiento cambiara segun el parametro que se envie en el endpoint.
 
 Las direcciones posibles son ``ASC`` (Orden Ascendente) y ``DESC`` (Orden Descendente).
+A continuaciÃ³n un ejemplo de la respuesta del servidor:
 ````json
 [
     {
         "id": 2,
         "nombre": "producto B",
-        "descripcion": "El producto N°2 de la base de datos",
+        "descripcion": "El producto NÂ°2 de la base de datos",
         "precio": 5.00,
         "cantidad": 250
     },
     {
         "id": 1,
         "nombre": "producto A",
-        "descripcion": "El producto N°1 de la base de datos",
+        "descripcion": "El producto NÂ°1 de la base de datos",
         "precio": 10.00,
         "cantidad": 10
     },
     {
         "id": 3,
         "nombre": "producto C",
-        "descripcion": "El producto N°3 de la base de datos",
+        "descripcion": "El producto NÂ°3 de la base de datos",
         "precio": 100.00,
         "cantidad": 5
     },
     {
         "id": 4,
         "nombre": "producto A",
-        "descripcion": "El producto N°4 de la base de datos",
+        "descripcion": "El producto NÂ°4 de la base de datos",
         "precio": 200.00,
         "cantidad": 50
     }
@@ -70,20 +71,20 @@ En el caso de que no exista ningun producto cargado en la tienda se recibira el 
 ````http
 GET https://localhost:8080/api/productos?nombre={nombre}
 ````
-Endpoint utilizado para obtener una lista de todos los productos con el mismo nombre
+Endpoint utilizado para obtener una lista de todos los productos con el mismo nombre. A continuacion un ejemplo de la devolucion del servidor:
 ````json
 [
     {
         "id": 1,
         "nombre": "producto A",
-        "descripcion": "El producto N°1 de la base de datos",
+        "descripcion": "El producto NÂ°1 de la base de datos",
         "precio": 10.00,
         "cantidad": 10
     },
     {
         "id": 4,
         "nombre": "producto A",
-        "descripcion": "El producto N°4 de la base de datos",
+        "descripcion": "El producto NÂ°4 de la base de datos",
         "precio": 200.00,
         "cantidad": 50
     }
@@ -100,18 +101,18 @@ En el caso de que no haya ningun producto con el nombre elegido se mostrara el m
 ````http
 GET https://localhost:8080/api/productos/{id}
 ````
-Endpoint utilizado para obtener un producto unico a partir de su Id:
+Endpoint utilizado para obtener un producto unico a partir de su Id. A continuacion un ejemplo de la devolucion del servidor:
 ````json
 {
     "id": 1,
     "nombre": "producto A",
-    "descripcion": "El producto N°1 de la base de datos",
+    "descripcion": "El producto NÂ°1 de la base de datos",
     "precio": 10.00,
     "cantidad": 10
 }
 ````
 
-En el caso de no existir un producto con dicho id. se le informara al cliente con el mensaje correspondiente
+En el caso de no existir un producto con dicho id. se le informara al cliente con el mensaje correspondiente:
 ````json
 {
     "message": "No se ha encontrado un producto con el id: '5'"
@@ -122,12 +123,23 @@ En el caso de no existir un producto con dicho id. se le informara al cliente co
 ````http
 POST https://localhost:8080/api/productos/
 ````
-Endpoint utilizado para cargar un producto en la Base de Datos:
+Endpoint utilizado para cargar un producto en la Base de Datos. A continuacion un ejemplo del cuerpo de la peticion HTTP:
+````json
+{
+    "nombre": "Producto nuevo",
+    "descripcion": "El produto NÂ°5 de la Base de Datos",
+    "precio": 1600,
+    "cantidad": 3000
+}
+````
+Todos los parametros mostrados anteriormente son obligatorios para la creaciÃ³n del producto y seran validados al momento de hacer la peticiÃ³n. El id sera generado automaticamente.
+
+A continuacion un ejemplo de la devolucion del servidor:
 ````json
 {
     "id": 5,
     "nombre": "Producto nuevo",
-    "descripcion": "El produto N°5 de la Base de Datos",
+    "descripcion": "El produto NÂ°5 de la Base de Datos",
     "precio": 1600,
     "cantidad": 3000
 }
@@ -146,20 +158,20 @@ En el caso de querer cargar a la base de datos un producto invalido, se mostrara
 PATCH https://localhost:8080/api/productos/{id}
 ````
 Endpoint utilizado para reemplazar valores de un producto encontrado por su id.
-Unicamente se deben enviar los campos que se quieran cambiar en formato JSON:
+Unicamente se deben enviar los campos que se quieran cambiar en formato JSON. A continuacion un ejemplo del cuerpo de la peticion HTTP:
 ````json
 {
    "nombre": "Producto nuevo modificado",
-   "descripcion": "el producto N°5 pero modificado",
+   "descripcion": "el producto NÂ°5 pero modificado",
    "precio": 2
 }
 ````
-Todos los campos a excepcion del Id son modificables. 
+Todos los campos a excepcion del Id son modificables. A continuacion un ejemplo de la devolucion del servidor: 
 ````json
 {
     "id": 5,
     "nombre": "Producto nuevo modificado",
-    "descripcion": "el producto N°5 pero modificado",
+    "descripcion": "el producto NÂ°5 pero modificado",
     "precio": 2,
     "cantidad": 3000
 }
@@ -171,7 +183,7 @@ En el caso de que se pasen campos invalidos para actualizar un producto se mostr
     "cantidad": "La cantidad no puede ser menor a 1"
 }
 ````
-En el caso de no existir un producto con dicho id. se le informara al cliente con el mensaje correspondiente
+En el caso de no existir un producto con dicho id. se le informara al cliente con el mensaje correspondiente:
 ````json
 {
     "message": "No se ha encontrado un producto con el id: '6'"
@@ -188,3 +200,12 @@ En el caso de ser eliminado correctamente de la Base de Datos, el cliente recibi
 ````json
 {
     "message": "El producto con el id '5' ha sido eliminado con exito"
+}
+````
+
+En el caso de no existir un producto con dicho id. se le informara al cliente con el mensaje correspondiente:
+````json
+{
+    "message": "No se ha encontrado un producto con el id: '6'"
+}
+````
