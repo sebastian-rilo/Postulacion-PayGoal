@@ -35,7 +35,9 @@ public class PostulacionApplication {
 					new Product(Long.valueOf(2), "producto B", "El producto N°2 de la base de datos",
 							BigDecimal.valueOf(5), Long.valueOf(250)),
 					new Product(Long.valueOf(3), "producto C", "El producto N°3 de la base de datos",
-							BigDecimal.valueOf(100), Long.valueOf(5)));
+							BigDecimal.valueOf(100), Long.valueOf(5)),
+					new Product(Long.valueOf(4), "producto A", "El producto N°4 de la base de datos",
+							BigDecimal.valueOf(200), Long.valueOf(50)));
 			prods.forEach(prod -> {
 				productSv.createProduct(prod);
 			});
