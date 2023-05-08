@@ -1,0 +1,6 @@
+com.PayGoal.Postulacion
+com.PayGoal.Postulacion.Controllers
+com.PayGoal.Postulacion.Models
+com.PayGoal.Postulacion.Repositories
+com.PayGoal.Postulacion.Services
+com.PayGoal.Postulacion.Utilities
