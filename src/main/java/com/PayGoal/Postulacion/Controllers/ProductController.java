@@ -33,7 +33,7 @@ public class ProductController {
 	 * 
 	 * @return Una respuesta HTTP con todos los productos de la base de datos.
 	 */
-	@GetMapping("/")
+	@GetMapping()
 	public ResponseEntity<?> getProducts() {
 		return RestHandler.handleDataResponses(productSv.getAllProducts(), HttpStatus.OK);
 	}
@@ -45,7 +45,7 @@ public class ProductController {
 	 * @return Una respuesta HTTP con todos los productos de la base de datos
 	 *         ordenados según su precio.
 	 */
-	@GetMapping(value = "/", params = "orden")
+	@GetMapping(params = "orden")
 	public ResponseEntity<?> getProductsPriceOrdered(@RequestParam("orden") @NotBlank String order) {
 		if (order.toUpperCase().equals("ASC") || order.toUpperCase().equals("DESC")) {
 			return RestHandler.handleDataResponses(productSv.getAllProductsOrderedByPrice(Direction.fromString(order)),
@@ -74,7 +74,7 @@ public class ProductController {
 	 * @param name El parámetro de búsqueda.
 	 * @return Una respuesta HTTP con los productos del mismo nombre.
 	 */
-	@GetMapping(value = "/", params = "nombre")
+	@GetMapping(params = "nombre")
 	public ResponseEntity<?> getProductsByName(@RequestParam("nombre") @NotBlank String name) {
 		return RestHandler.handleDataResponses(productSv.getProductsByName(name), HttpStatus.OK);
 	}

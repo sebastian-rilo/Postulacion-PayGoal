@@ -12,7 +12,7 @@ Este es un Proyecto de pequeña escala desarrollado para modelar un sistema de ge
 Este proyecto cuenta con datos precargados para facilitar la prueba de funcionalidades de la aplicación. En caso de querer inicializar la App con una base de datos vacia, se debe comentar/eliminar el [metodo inicializador ubicado en la clase principal de la aplicacion](https://github.com/sebastian-rilo/Postulacion-PayGoal/blob/272ce5e0aaf063c7455e485f70e53d750ee3dc0d/src/main/java/com/PayGoal/Postulacion/PostulacionApplication.java#L30). 
 
 ## Endpoints
-Este proyecto cuenta con un total de 7 ednpoints que van a permitir al usuario crear, actualizar, eliminar y hacer consultas sobre los produtos de la base de datos
+Este proyecto cuenta con un total de 7 ednpoints que van a permitir al usuario crear, actualizar, eliminar y hacer consultas sobre los produtos de la base de datos.
 
  - [Obtener todos los Productos](#obtener-todos-los-productos)
  - [Obtener todos los productos ordenados por precio](#obtener-todos-los-productos-ordenados-por-precio)
@@ -24,7 +24,7 @@ Este proyecto cuenta con un total de 7 ednpoints que van a permitir al usuario c
 
 ## Obtener todos los productos
 ````http
-GET https://localhost:8080/api/productos/ 
+GET https://localhost:8080/api/productos 
 ````
 Endpoint que nos permite obtener de manera directa una lista de productos:
 ````json
@@ -64,16 +64,14 @@ En el caso de que no exista ningun producto cargado en la tienda se recibira el 
 {"message": "No se ha encontrado ningun producto en la base de datos"}
 ````
 
----
 ## Obtener todos los productos ordenados por precio
 ````http
-GET https://localhost:8080/api/productos/?orden={orden}
+GET https://localhost:8080/api/productos?orden={orden}
 ````
 Endpoint que nos permite obtener de manera directa una lista de productos, esta vez ordenados segun su precio.
 La direccion del ordenamiento cambiara segun el parametro que se envie en el endpoint.
 
-Las las direcciones posibles son ``ASC `` (Orden Ascendente) y `` DESC`` (Orden Descendente)
-por defecto el ordenamiento es ascendente:
+Las las direcciones posibles son ``ASC`` (Orden Ascendente) y ``DESC`` (Orden Descendente).
 ````json
 [
     {
@@ -110,10 +108,10 @@ En el caso de que no exista ningun producto cargado en la tienda se recibira el 
 ````json
 {"message": "No se ha encontrado ningun producto en la base de datos"}
 ````
----
+
 ## Obtener todos los productos con el mismo nombre
 ````http
-GET https://localhost:8080/api/productos/?nombre={nombre}
+GET https://localhost:8080/api/productos?nombre={nombre}
 ````
 Endpoint utilizado para obtener una lista de todos los productos con el mismo nombre
 ````json
@@ -141,7 +139,6 @@ En el caso de que no haya ningun producto con el nombre elegido se mostrara el m
 }
 ````
 
----
 ## Obtener un producto por Id
 ````http
 GET https://localhost:8080/api/productos/{id}
@@ -164,7 +161,6 @@ En el caso de no existir un producto con dicho id. se le informara al cliente co
 }
 ````
 
----
 ## Crear un producto
 ````http
 POST https://localhost:8080/api/productos/
@@ -188,7 +184,6 @@ En el caso de querer cargar a la base de datos un producto invalido, se mostrara
 }
 ````
 
----
 ## Actualizar un producto
 ````http
 PATCH https://localhost:8080/api/productos/{id}
@@ -225,7 +220,7 @@ En el caso de no existir un producto con dicho id. se le informara al cliente co
     "message": "No se ha encontrado un producto con el id: '6'"
 }
 ````
----
+
 ## Eliminar un producto
 ````http
 DELETE https://localhost:8080/api/productos/{id}
