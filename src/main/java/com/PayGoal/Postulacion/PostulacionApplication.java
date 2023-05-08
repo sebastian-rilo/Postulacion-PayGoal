@@ -24,7 +24,6 @@ public class PostulacionApplication {
 
 	/**
 	 * Método que carga productos al momento de inicializar el servidor.
-	 * @return
 	 */
 	@Bean
 	CommandLineRunner runner() {

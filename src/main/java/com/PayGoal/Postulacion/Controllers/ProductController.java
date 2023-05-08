@@ -29,16 +29,6 @@ public class ProductController {
 	ProductService productSv;
 
 	/**
-	 * Obtiene todos los productos en la base de datos.
-	 * 
-	 * @return Una respuesta HTTP con todos los productos de la base de datos.
-	 */
-	@GetMapping()
-	public ResponseEntity<?> getProducts() {
-		return RestHandler.handleDataResponses(productSv.getAllProducts(), HttpStatus.OK);
-	}
-
-	/**
 	 * Obtiene todos los productos en la Base de Datos ordenados según su precio.
 	 * 
 	 * @param order La dirección de ordenamiento.

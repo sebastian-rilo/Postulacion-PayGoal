@@ -20,22 +20,6 @@ public class ProductService {
 	@Autowired
 	ProductRepository productRepo;
 
-	
-	/**
-	 * Obtiene todos los productos de la Base de datos. 
-	 * @return Una Lista con todos los productos de la Base de Datos.
-	 * @throws ResponseStatusException - En caso de que no se encuentre ningún producto.
-	 */
-	public List<Product> getAllProducts() throws ResponseStatusException {
-		List<Product> products = new ArrayList<Product>();
-		productRepo.findAll().forEach(products::add);
-		if (products.isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-					"No se ha encontrado ningun producto en la base de datos");
-		}
-		return products;
-	}
-
 	/**
 	 * Obtiene todos los productos de la Base de datos ordenados según su precio.
 	 * @param direction la dirección en la cual ordenar los productos.

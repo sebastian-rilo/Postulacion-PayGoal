@@ -43,46 +43,6 @@ class ProductControllerIntegrationTest {
 	private ObjectMapper objectMapper;
 
 	/**
-	 * Prueba que el servidor envíe una lista de productos en caso de que se
-	 * encuentre al menos un producto en la Base de Datos.
-	 */
-	@Test
-	void testGetProducts() throws Exception {
-
-		List<Product> products = List.of(
-				new Product(Long.valueOf(1), "producto A", "El producto N°1 de la base de datos",
-						BigDecimal.valueOf(10), Long.valueOf(10)),
-				new Product(Long.valueOf(2), "producto B", "El producto N°2 de la base de datos", BigDecimal.valueOf(5),
-						Long.valueOf(250)),
-				new Product(Long.valueOf(3), "producto C", "El producto N°3 de la base de datos",
-						BigDecimal.valueOf(100), Long.valueOf(5)));
-		products.forEach(prod -> {
-			service.createProduct(prod);
-		});
-		Mockito.doReturn(products).when(service).getAllProducts();
-		final String expectedResponseContent = objectMapper.writeValueAsString(products);
-		this.mockMvc.perform(get("/api/productos/")).andExpect(status().isOk())
-				.andExpect(content().json(expectedResponseContent));
-		verify(service).getAllProducts();
-	}
-
-	/**
-	 * Prueba que el servidor envíe un mensaje de error en caso de que no se
-	 * encuentre ningún producto en la Base de Datos.
-	 */
-	@Test
-	void testGetNoProducts() throws Exception {
-		Map<String, String> message = new HashMap<String, String>();
-		message.put("message", "No se ha encontrado ningun producto en la base de datos");
-		Mockito.doThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,
-				"No se ha encontrado ningun producto en la base de datos")).when(service).getAllProducts();
-		final String expectedResponseContent = objectMapper.writeValueAsString(message);
-		this.mockMvc.perform(get("/api/productos/")).andExpect(status().isNotFound())
-				.andExpect(content().json(expectedResponseContent));
-		verify(service).getAllProducts();
-	}
-
-	/**
 	 * Prueba que el servidor envíe una lista de productos ordenados según su precio
 	 * en orden ascendente en caso de que se encuentren al menos dos productos en la
 	 * Base de Datos.
@@ -105,7 +65,7 @@ class ProductControllerIntegrationTest {
 		});
 		Mockito.doReturn(products).when(service).getAllProductsOrderedByPrice(Direction.ASC);
 		final String expectedResponseContent = objectMapper.writeValueAsString(products);
-		this.mockMvc.perform(get("/api/productos/?orden=ASC")).andExpect(status().isOk())
+		this.mockMvc.perform(get("/api/productos?orden=ASC")).andExpect(status().isOk())
 				.andExpect(content().json(expectedResponseContent));
 		verify(service).getAllProductsOrderedByPrice(Direction.ASC);
 	}
@@ -134,7 +94,7 @@ class ProductControllerIntegrationTest {
 		Collections.reverse(products);
 		Mockito.doReturn(products).when(service).getAllProductsOrderedByPrice(Direction.DESC);
 		final String expectedResponseContent = objectMapper.writeValueAsString(products);
-		this.mockMvc.perform(get("/api/productos/?orden=DESC")).andExpect(status().isOk())
+		this.mockMvc.perform(get("/api/productos?orden=DESC")).andExpect(status().isOk())
 				.andExpect(content().json(expectedResponseContent));
 		verify(service).getAllProductsOrderedByPrice(Direction.DESC);
 	}
@@ -151,7 +111,7 @@ class ProductControllerIntegrationTest {
 				"No se ha encontrado ningun producto en la base de datos")).when(service)
 				.getAllProductsOrderedByPrice(Direction.ASC);
 		final String expectedResponseContent = objectMapper.writeValueAsString(message);
-		this.mockMvc.perform(get("/api/productos/?orden=ASC")).andExpect(status().isNotFound())
+		this.mockMvc.perform(get("/api/productos?orden=ASC")).andExpect(status().isNotFound())
 				.andExpect(content().json(expectedResponseContent));
 		verify(service).getAllProductsOrderedByPrice(Direction.ASC);
 	}
@@ -206,7 +166,7 @@ class ProductControllerIntegrationTest {
 		});
 		Mockito.doReturn(products).when(service).getProductsByName("producto con copias");
 		final String expectedResponseContent = objectMapper.writeValueAsString(products);
-		this.mockMvc.perform(get("/api/productos/?nombre=producto con copias")).andExpect(status().isOk())
+		this.mockMvc.perform(get("/api/productos?nombre=producto con copias")).andExpect(status().isOk())
 				.andExpect(content().json(expectedResponseContent));
 		verify(service).getProductsByName("producto con copias");
 	}
@@ -224,7 +184,7 @@ class ProductControllerIntegrationTest {
 				"No se ha encontrado ningun producto con el nombre 'producto con copias'")).when(service)
 				.getProductsByName("producto con copias");
 		final String expectedResponseContent = objectMapper.writeValueAsString(message);
-		this.mockMvc.perform(get("/api/productos/?nombre=producto con copias")).andExpect(status().isNotFound())
+		this.mockMvc.perform(get("/api/productos?nombre=producto con copias")).andExpect(status().isNotFound())
 				.andExpect(content().json(expectedResponseContent));
 		verify(service).getProductsByName("producto con copias");
 	}
